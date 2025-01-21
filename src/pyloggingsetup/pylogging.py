@@ -1,3 +1,16 @@
+"""Module containing Python code for the pyloggingsetup library.
+
+Attributes:
+    __author__ (str): Python package template author.
+    __email__ (str): Python package template author email.
+
+"""
+
+from __future__ import annotations
+
+__author__ = "Wren J. Rudolph for Wrencode, LLC"
+__email__ = "dev@wrencode.com"
+
 import logging
 import logging.handlers as handlers
 import os
@@ -12,9 +25,6 @@ from typing import Optional
 
 import colorama
 from colorama import Fore, Style
-from dotenv import load_dotenv
-
-load_dotenv(Path(__file__).parent.parent.parent / ".env")
 
 colorama.init()
 
@@ -85,9 +95,7 @@ class SizedTimedRotatingFileHandler(TimedRotatingFileHandler):
         interval=1,
         utc=False,
     ):
-        handlers.TimedRotatingFileHandler.__init__(
-            self, filename, when, interval, backupCount, encoding, delay, utc
-        )
+        handlers.TimedRotatingFileHandler.__init__(self, filename, when, interval, backupCount, encoding, delay, utc)
         self.maxBytes = maxBytes
         # noinspection PyTypeChecker
         self.stream = None
@@ -212,11 +220,16 @@ def get_logger(
 
 
 if __name__ == "__main__":
-    local_root_directory = Path(__file__).parent
+    from dotenv import load_dotenv
 
-    local_log_file = local_root_directory / "logs" / "out.log"
+    local_root_directory = Path(__file__).parent.parent.parent
 
-    local_logger = get_logger(__name__)
+    load_dotenv(local_root_directory / ".env")
+
+    local_log_dir = local_root_directory / "logs"
+    local_log_file = local_log_dir / "out.log"
+
+    local_logger = get_logger(__name__, log_dir=local_log_dir)
     local_logger.setLevel(logging.DEBUG)
 
     local_handler = SizedTimedRotatingFileHandler(

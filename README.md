@@ -1,2 +1,3 @@
-# pylogging
-Pre-configured Python logging with logging module.
+# pyloggingsetup - Python Logging Setup
+
+Pre-configured Python logging using the built-in logging module.

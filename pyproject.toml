@@ -1,0 +1,72 @@
+[project]
+name = "pyloggingsetup"
+dynamic = ["version"]
+authors = [
+    { name="Wren J. Rudolph for Wrencode, LLC", email="dev@wrencode.com" },
+]
+license = { text = "MIT" }
+description = "Pre-configured Python logging using the built-in logging module."
+readme = "README.md"
+requires-python = ">=3.9"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+dependencies = [
+    "colorama>=0.4.6",
+]
+
+[dependency-groups]
+dev = [
+    "python-dotenv>=1.0.1",
+    "ruff>=0.9.2",
+]
+
+[project.urls]
+Homepage = "https://github.com/wrencode/pyloggingsetup"
+Issues = "https://github.com/wrencode/pyloggingsetup/issues"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.ruff]
+exclude = [
+    ".git",
+    ".github",
+    ".idea",
+    ".pytest_cache",
+    ".python-venv",
+    "__pycache__",
+    "build",
+    "dist",
+    "scripts"
+]
+extend-exclude = [
+    "src/pyloggingsetup/__init__.py"
+]
+line-length = 120
+indent-width = 4
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+skip-magic-trailing-comma = false
+line-ending = "auto"
+
+[tool.ruff.lint]
+extend-select = [
+    "E501"
+]
+
+[tool.hatch.version]
+path = "VERSION.py"
+
+[tool.custom]
+environment = ".venv-python_3.13.1"
